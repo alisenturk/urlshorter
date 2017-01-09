@@ -5,6 +5,8 @@ import java.util.List;
 
 public class ResponseData<T> implements Serializable {
 	
+	private static final long serialVersionUID = 3213924808186128070L;
+	
 	private String 	statusCode;
 	private String 	statusMessage;
 	private T		data;

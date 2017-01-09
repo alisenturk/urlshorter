@@ -2,6 +2,9 @@ package com.alisenturk.model.response;
 
 public enum ResponseStatus {
 	OK("OK","İşlem Başarılı"),
+	NORECORD("NORECORD","Kayıt bulunamadı!"),
+	INVALID("INVALID","Geçersiz işlem!"),
+	INVALID_TOKEN("INVALID_TOKEN","Geçersiz token!"),
 	NOK("NOK","İşlem Başarısızlıkla sonuçlandı!");
 	
 	ResponseStatus(String code, String message) {

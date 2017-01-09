@@ -21,15 +21,22 @@ public class UserServiceImpl implements UserService {
 		return (List<User>)userDao.findAll();
 	}
 
-	@Override
-	public User findMemberById(Long id) {
-		return userDao.findOne(id);
-	}
 
 	@Override
 	public void save(User user) {
 		userDao.save(user);
 		
+	}
+
+	@Override
+	public User findUserById(Long id) {
+		return userDao.findOne(id);
+	}
+
+	@Override
+	public User findUserByIdAndUsername(Long id, String username) {
+		// TODO : Oğuz -> Kullanıcı adı ve id'ye göre arama yapan query'i UserDao'da yazar mısın?
+		return null;
 	}
 	
 
