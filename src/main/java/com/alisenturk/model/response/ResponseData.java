@@ -11,6 +11,8 @@ public class ResponseData<T> implements Serializable {
 	private String 	statusMessage;
 	private T		data;
 	private int		dataCount=-1;
+	private String	token;
+	
 	public String getStatusCode() {
 		return statusCode;
 	}
@@ -39,6 +41,12 @@ public class ResponseData<T> implements Serializable {
 	}
 	public void setDataCount(int dataCount) {
 		this.dataCount = dataCount;
+	}
+	public String getToken() {
+		return token;
+	}
+	public void setToken(String token) {
+		this.token = token;
 	}
 	
 

@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alisenturk.model.JWTUtil;
+import com.alisenturk.model.User;
+import com.alisenturk.model.response.ResponseData;
 
 @RestController
 public class LoginController {
@@ -16,10 +18,18 @@ public class LoginController {
 	JWTUtil jwutil;
 	
 	@RequestMapping(path="/login",method=RequestMethod.POST)
-	public @ResponseBody String doLogin(@RequestParam String username,@RequestParam String password){
-		String result = "Selam " + username;
+	public @ResponseBody ResponseData<User> doLogin(@RequestParam String username,@RequestParam String password){
+		
+		ResponseData<User> result = new ResponseData<>();
+		
 	
-		result = jwutil.generateTokenWithJWT(1,"ali");		
+		// jwutil.generateTokenWithJWT(1,"ali"); /Token oluşturma
+		
+		/* TODO : Mehmet Emin -> Kullanıcı adı ve şifreye sahip bir user'ın olup olmadığı kontrol edilecek. User varsa result'ın data
+		 * alanına set edilecek. Aynı zamanda Bu kullanıcı için token oluşturulacak ve bu token da result'taki token alanına set edilecek. 
+		 */
+		
+		
 		
 		
 		return result;
