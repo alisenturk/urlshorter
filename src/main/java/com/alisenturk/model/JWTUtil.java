@@ -72,7 +72,7 @@ public class JWTUtil {
 		    Date expDate = jwt.getBody().getExpiration();
 		    Date now = new Date();
 		    double diff = Helper.dateDifferent(now,expDate,Calendar.SECOND);
-		    
+		    System.out.println("now..:" + now + " exp..:" + expDate +" diff..:" + diff);
 		    valid = diff>0;
 		    
 		}catch (ExpiredJwtException e) {

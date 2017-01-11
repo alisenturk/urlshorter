@@ -6,10 +6,13 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
-public class UserLink extends BaseEntity {
+@Table(name="UserLink")
+public class Link extends BaseEntity {
 	
+	private String	domainURL;
 	private String	longUrl;
 	private String	shortUrl;
 	private String	title;
@@ -53,6 +56,14 @@ public class UserLink extends BaseEntity {
 	}
 	public void setLinkEvents(List<LinkEvent> linkEvents) {
 		this.linkEvents = linkEvents;
+	}
+	
+	@Column(length=120)
+	public String getDomainURL() {
+		return domainURL;
+	}
+	public void setDomainURL(String domainURL) {
+		this.domainURL = domainURL;
 	}
 	
 	

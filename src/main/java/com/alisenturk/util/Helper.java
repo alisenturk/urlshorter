@@ -1,6 +1,5 @@
 package com.alisenturk.util;
 
-import java.awt.image.BufferedImage;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,8 +13,6 @@ import java.math.BigDecimal;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Clob;
@@ -29,10 +26,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
-import java.util.ResourceBundle;
+import java.util.StringTokenizer;
 import java.util.concurrent.ThreadLocalRandom;
 
-import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -848,4 +844,29 @@ public class Helper {
 		int rand = ThreadLocalRandom.current().nextInt(100000,999999);
 		return rand;
 	}
+	public static String getUserIpAddress(HttpServletRequest request){
+        String ipadressstr = "";
+        try{
+			   ipadressstr = request.getHeader("X-Forwarded-For");
+				if(ipadressstr==null){
+			                   ipadressstr = request.getRemoteAddr();
+			   }                                                            
+			   if(ipadressstr!=null){
+			                   StringTokenizer st = new StringTokenizer(ipadressstr,",");
+			                   while (st.hasMoreTokens()) {
+			                                  ipadressstr = st.nextToken();
+			                   }
+			   }else{
+			                   ipadressstr  = "127.0.0.1";
+			   }
+			  
+			   if(ipadressstr==null || ipadressstr.indexOf(":")>-1){
+			               ipadressstr  = "127.0.0.1";
+			   }
+        }catch (Exception e) {
+                                       Helper.errorLogger(Helper.class, e);
+                       }
+       
+        return ipadressstr.trim();
+}
 }

@@ -1,8 +1,11 @@
 package com.alisenturk.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +31,24 @@ public class UserController {
 	
 	@Autowired
 	JWTUtil jwtutil;
+	 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+	
+	private String generateApiKey(String kullaniciAdi){
+		UUID uuid = UUID.randomUUID();
+		String key = uuid.toString()+"#"+kullaniciAdi; 
+		String token = passwordEncoder.encode(key);
+		
+		return token;
+	}
 	
 	@RequestMapping(value="/save",method=RequestMethod.POST, produces = {"application/json","application/xml"})
 	public @ResponseBody ResponseData<String> saveMember(@RequestBody User user){
 		ResponseData<String> response = new ResponseData<>();
-		try{			
+		try{
+			
+			user.setApiKey(generateApiKey(user.getUsername()));
 			userService.save(user);
 			response.setStatusCode(ResponseStatus.OK.getCode());
 			response.setStatusMessage(ResponseStatus.OK.getMessage());

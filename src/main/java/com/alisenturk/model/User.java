@@ -13,6 +13,7 @@ public class User extends BaseEntity  implements BaseInterface{
 	private String	surname;
 	private String	email;
 	private String	apiKey;
+	private String	domainURL = "http://url5.xyz";
 	
 	@Column(length=20,nullable=false, unique=true)
 	public String getUsername() {
@@ -37,7 +38,7 @@ public class User extends BaseEntity  implements BaseInterface{
 		this.surname = surname;
 	}
 	
-	@Column(length=60,nullable=false)
+	@Column(length=60,nullable=false,unique=true)
 	public String getEmail() {
 		return email;
 	}
@@ -51,6 +52,19 @@ public class User extends BaseEntity  implements BaseInterface{
 	}
 	public void setApiKey(String apiKey) {
 		this.apiKey = apiKey;
+	}
+	@Override
+	public String toString() {
+		return "User [username=" + username + ", name=" + name + ", surname=" + surname + ", email=" + email
+				+ ", apiKey=" + apiKey + ", domainURL=" + domainURL + "]";
+	}
+	
+	@Column(length=120)
+	public String getDomainURL() {
+		return domainURL;
+	}
+	public void setDomainURL(String domainURL) {
+		this.domainURL = domainURL;
 	}
 	
 	

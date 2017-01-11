@@ -8,17 +8,18 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class LinkEvent extends BaseEntity {
 	
-	private UserLink	userLink;
+	private Link		userLink;
 	private String		referrer;
 	private String		location;
 	private String		ipAddress;
+	private String		headerValues;
 	
 	@NotNull
 	@ManyToOne	
-	public UserLink getUserLink() {
+	public Link getUserLink() {
 		return userLink;
 	}
-	public void setUserLink(UserLink userLink) {
+	public void setUserLink(Link userLink) {
 		this.userLink = userLink;
 	}
 	
@@ -44,6 +45,14 @@ public class LinkEvent extends BaseEntity {
 	}
 	public void setIpAddress(String ipAddress) {
 		this.ipAddress = ipAddress;
+	}
+	
+	@Column(length=3000)
+	public String getHeaderValues() {
+		return headerValues;
+	}
+	public void setHeaderValues(String headerValues) {
+		this.headerValues = headerValues;
 	}
 	
 	
